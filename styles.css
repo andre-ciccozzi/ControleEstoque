@@ -1,0 +1,147 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; /* Cinza claro */
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #001f3f; /* Azul escuro */
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff; /* Branco */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin: 10px 0 5px;
+}
+
+form input, form select, form button {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    background-color: #ff851b; /* Laranja */
+    color: #fff;
+    cursor: pointer;
+    border: none;
+}
+
+form button:hover {
+    background-color: #ff7701; /* Laranja escuro */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4; /* Cinza claro */
+}
+
+td:nth-child(4) {
+    text-align: center;
+}
+
+.login-container, .register-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: #fff; /* Branco */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.login-container h1, .register-container h1 {
+    margin-bottom: 20px;
+}
+
+.login-container form, .register-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-container form label, .register-container form label {
+    margin: 10px 0 5px;
+    align-self: flex-start;
+}
+
+.login-container form input, .register-container form input, .login-container form button, .register-container form button {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.login-container form button, .register-container form button {
+    background-color: #ff851b; /* Laranja */
+    color: #fff;
+    cursor: pointer;
+    border: none;
+}
+
+.login-container form button:hover, .register-container form button:hover {
+    background-color: #ff7701; /* Laranja escuro */
+}
+
+.login-container p, .register-container p {
+    margin-top: 10px;
+}
+
+.message {
+    text-align: center;
+    margin: 20px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.message.success {
+    background-color: #ff851b; /* Laranja */
+    color: #fff;
+    border: 1px solid #ff7701; /* Laranja escuro */
+}
+
+.message.error {
+    background-color: #001f3f; /* Azul escuro */
+    color: #fff;
+    border: 1px solid #ff7701; /* Laranja escuro */
+}
+.logo {
+    width: 80px; /* Defina o tamanho desejado */
+    margin-right: 20px; /* Espaçamento à direita para separar do texto */
+    float: left; /* Alinhar a imagem à esquerda */
+}
+
+.title {
+    font-family: "Copperplate Gothic", sans-serif;
+}
+
