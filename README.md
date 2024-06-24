@@ -20,8 +20,8 @@ O ControleEstoque da AGS Solution é um software completo para gerenciar o estoq
 - Melhora na tomada de decisões
 - Aumento da lucratividade
 
-# -----------------------------------ATIVIDADES-----------------------------
-
+<h2 align="center"> ATIVIDADES
+<hr>
 <table align="center">
         <thead>
             <tr>
@@ -44,3 +44,4 @@ O ControleEstoque da AGS Solution é um software completo para gerenciar o estoq
             </tr>
         </tbody>
     </table>
+<hr>
