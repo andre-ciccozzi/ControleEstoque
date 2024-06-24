@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="icon" href="/img/logo.png" type="image/png">
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/login.css"> <!-- Utilizando o caminho correto para o seu CSS -->
+</head>
+
+<body>
+  <section class="py-3 py-md-5 py-xl-8">
+    <div class="container">
+      <div class="row gy-4 align-items-center">
+        <div class="col-12 col-md-6">
+          <div class="d-flex justify-content-center">
+            <div class="col-12 info-section">
+              <!-- Conteúdo dinâmico que você deseja adicionar -->
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="card border-0 rounded-4">
+            <div class="card-body p-3 p-md-4 p-xl-5">
+              <div class="row">
+                <div class="col-12 mb-4">
+                  <center><a href="{{ url_for('home') }}"><img class="img-fluid" src="/img/logo.png" alt="Logo" style="max-width: 150px;"></a></center>
+                  <h3 class="text-center">Login</h3>
+                  <p class="text-center">Não tem uma conta? <a href="cadastro.html">Inscreva-se</a></p>
+                </div>
+              </div>
+              <form action="#!">
+                <div class="row gy-3">
+                  <div class="col-12">
+                    <div class="form-floating mb-3">
+                      <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+                      <label for="email">Email ou Usuário<span class="text-danger">*</span></label>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-floating mb-3">
+                      <input type="password" class="form-control" id="password" placeholder="senha" required>
+                      <label for="password">Senha <span class="text-danger">*</span></label>
+                    </div>
+                  </div>
+                  <div class="col-12 mt-2 mb-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" name="remember_me" id="remember_me">
+                      <label class="form-check-label text-secondary" for="remember_me">
+                        Mostrar a Senha
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="d-grid">
+                      <button class="btn btn-primary btn-lg" type="button" id="loginBtn">Confirmar</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    /*
+      document.getElementById('loginBtn').addEventListener('click', async function() {
+          const user = document.getElementById('email').value;
+          const password = document.getElementById('password').value;
+          const rememberMe = document.getElementById('remember_me').checked;
+  
+          const response = await fetch('http://35.211.233.11:5000/validate_login', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ user: user, password: password })
+          });
+  
+          if (response.status === 200) {
+              const userData = await response.json();
+              if (rememberMe) {
+                  localStorage.setItem('user', JSON.stringify(userData.user));
+              } else {
+                  sessionStorage.setItem('user', JSON.stringify(userData.user));
+              }
+              window.location.href = '{{ url_for("index") }}';
+          } else {
+              alert('Usuário ou senha incorretos');
+          }
+      });
+  
+      // window.onload = function() {
+      //     const userData = localStorage.getItem('user') || sessionStorage.getItem('user');
+      //     if (userData) {
+      //         window.location.href = '{{ url_for("index") }}'; // Redirect if user is already logged in
+      //     }
+      // };
+      */
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

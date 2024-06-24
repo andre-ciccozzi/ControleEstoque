@@ -1,0 +1,136 @@
+body {
+    background-image: url('/img/showroom.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Roboto', sans-serif;
+    justify-content: center;
+}
+
+.info-section {
+    color: white;
+    letter-spacing: 0.1em;
+    text-indent: 3em;
+    font-weight: 500;
+}
+
+.info-section hr {
+    border-top: 1px solid white;
+}
+
+.btn-custom {
+    border-color: #5b287c;
+    color: #5b287c
+}
+
+
+
+@media (min-width: 1920px) {
+    .card {
+        margin-top: 5px;
+    }
+
+    .info-section h2 hr {
+        margin-top: -200px;
+    }
+
+    .info-section hr {
+        margin-top: -300px;
+    }
+
+    .ml-custom {
+        margin-left: 93%;
+        margin-top: -10%;
+    }
+}
+
+
+@media (min-width: 1440px) and (max-width: 1920px) {
+    .card {
+        margin-top: 5px;
+    }
+
+    .info-section h2 hr {
+        margin-top: -200px;
+    }
+
+    .info-section hr {
+        margin-top: -300px;
+    }
+
+    .ml-custom {
+        margin-left: 93%;
+        margin-top: -10%;
+    }
+}
+
+
+@media (min-width: 1024px) and (max-width: 1440px) {
+    .card {
+        margin-top: 5px;
+    }
+
+    .info-section h2 hr {
+        margin-top: -200px;
+    }
+
+    .info-section hr {
+        margin-top: -300px;
+    }
+
+    .ml-custom {
+        margin-left: 85%;
+        margin-top: -2%;
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .card {
+        margin-top: 5px;
+    }
+
+    .info-section h2 hr {
+        margin-top: -200px;
+    }
+
+    .info-section hr {
+        margin-top: -290px;
+    }
+
+    .ml-custom {
+        margin-left: 80%;
+        margin-top: -4%;
+    }
+}
+
+.btn-primary {
+    background-color:#ff851b; /* Altere para a cor desejada */
+    border-color: #ff851b; /* Altere para a cor desejada */
+    color: #ffffff; /* Cor do texto */
+}
+
+.btn-primary:hover {
+    background-color: #ff851b; /* Cor ao passar o mouse */
+    border-color: #ff851b /* Cor ao passar o mouse */
+}
+.btn-primary:focus, .btn-primary:active {
+    background-color: #ff851b; /* Cor ao focar ou clicar */
+    border-color: #ff851b; /* Cor ao focar ou clicar */
+}
+.btn-custom {
+    background-color: #ff5733; /* Cor de fundo personalizada */
+    border-color: #ff5733; /* Cor da borda personalizada */
+    color: #ffffff; /* Cor do texto personalizada */
+}
+
+.btn-custom:hover {
+    background-color: #e04e2a; /* Cor de fundo ao passar o mouse */
+    border-color: #e04e2a; /* Cor da borda ao passar o mouse */
+    color: #ffffff; /* Cor do texto ao passar o mouse */
+}
+
+.btn-custom:focus, .btn-custom:active {
+    background-color: #c94421; /* Cor de fundo ao focar ou clicar */
+    border-color: #c94421; /* Cor da borda ao focar ou clicar */
+    color: #ffffff; /* Cor do texto ao focar ou clicar */
+}
