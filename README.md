@@ -20,10 +20,27 @@ O ControleEstoque da AGS Solution é um software completo para gerenciar o estoq
 - Melhora na tomada de decisões
 - Aumento da lucratividade
 
-# ATIVIDADES
+#      -----------------------------------ATIVIDADES-----------------------------
 
-| Categoria     | Descrição |
-|----------------------------|----------------------------------------------------------------------------|
-| Correção pastas | Retirar pasta ControleEstoque-main, deixar apenas subpastas interiores |
-| Front | Terminar de incrementar Front (detalhes código, css) |
-| Front-JS | Terminar de incrementar lógica com JS para postar planilhas na web |
+<table>
+        <thead>
+            <tr>
+                <th>Categoria</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Correção pastas</td>
+                <td>Retirar pasta ControleEstoque-main, deixar apenas subpastas interiores</td>
+            </tr>
+            <tr>
+                <td>Front</td>
+                <td>Terminar de incrementar Front (detalhes código, css)</td>
+            </tr>
+            <tr>
+                <td>Front-JS</td>
+                <td>Terminar de incrementar lógica com JS para postar planilhas na web</td>
+            </tr>
+        </tbody>
+    </table>
