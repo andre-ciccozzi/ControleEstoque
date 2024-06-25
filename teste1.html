@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planilha para HTML</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Carregar Planilha</h1>
+    <input type="file" id="file-input" />
+    <div id="spreadsheet-container"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <script src="script1.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+SEPARE OOS ARUQIVOS
+
+
+
+document.getElementById('file-input').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const data = new Uint8Array(e.target.result);
+            const workbook = XLSX.read(data, { type: 'array' });
+
+            const firstSheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[firstSheetName];
+
+            // Converter a planilha para JSON
+            const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
+            // Gerar HTML da tabela
+            let htmlString = '<table>';
+            jsonData.forEach((row, rowIndex) => {
+                htmlString += '<tr>';
+                row.forEach((cell, colIndex) => {
+                    if (rowIndex === 0) {
+                        htmlString += `<th>${cell}</th>`;
+                    } else {
+                        htmlString += `<td>${cell}</td>`;
+                    }
+                });
+                htmlString += '</tr>';
+            });
+            htmlString += '</table>';
+
+            document.getElementById('spreadsheet-container').innerHTML = htmlString;
+        };
+        reader.readAsArrayBuffer(file);
+    }
+});
