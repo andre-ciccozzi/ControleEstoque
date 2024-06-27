@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Estoque - Adicionar Item</title>
+    <link rel="icon" href="/ControleEstoque-main/img/logo.png" type="image/png">
+    <link rel="stylesheet" href="/ControleEstoque-main/static/styles.css">
+</head>
+<body>
+    <header>
+        <img src="/ControleEstoque-main/img/logo.png" alt="Logo" class="logo">
+        <h1 class="title">EstoqueSimples</h1>
+    </header>
+    <div class="container">
+        <form id="add-item-form">
+            <h2>Adicionar Item</h2>
+            <label for="responsavel">Responsável:</label>
+            <input type="text" id="responsavel" name="responsavel" required>
+            
+            <label for="cargo">Cargo:</label>
+            <input type="text" id="cargo" name="cargo" required>
+            
+            <label for="local-obra">Local/Obra:</label>
+            <input type="text" id="local-obra" name="local-obra" required>
+            
+            <label for="marca-modelo">Marca/Modelo:</label>
+            <input type="text" id="marca-modelo" name="marca-modelo" required>
+            
+            <label for="serial">Serial:</label>
+            <input type="text" id="serial" name="serial" required>
+            
+            <label for="sequencial">Sequencial:</label>
+            <input type="text" id="sequencial" name="sequencial" required>
+            
+            <label for="observacao">Observação:</label>
+            <textarea id="observacao" name="observacao" required></textarea>
+            
+            <button type="submit" class="btn-adicionar">Adicionar</button>
+        </form>
+    </div>
+    <footer>
+        <p>&copy; AGS Solution</p>
+    </footer>
+    
+    <script src="/ControleEstoque-main/templates/exel.js"></script>
+</body>
+</html>

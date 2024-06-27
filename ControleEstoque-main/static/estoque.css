@@ -1,0 +1,103 @@
+/* Estilos para a tabela */
+.table-container {
+    overflow-x: auto; /* Adiciona scroll horizontal se necessário */
+}
+
+#inventory-table {
+    width: 100%;
+    border-collapse: collapse; /* Remove espaçamento entre células */
+    margin-top: 20px; /* Espaçamento superior */
+    table-layout: fixed; /* Tabela de layout fixo */
+}
+
+#inventory-table th, #inventory-table td {
+    padding: 12px; /* Espaçamento interno das células */
+    text-align: left; /* Alinhamento do texto à esquerda */
+    border-bottom: 1px solid #ddd; /* Linha separadora entre as linhas */
+    word-wrap: break-word; /* Quebra de palavra para textos longos */
+}
+
+#inventory-table th {
+    background-color: #001f3f; /* Cor de fundo do cabeçalho */
+    color: #ffffff; /* Cor do texto no cabeçalho */
+    font-weight: bold; /* Texto em negrito no cabeçalho */
+    text-transform: uppercase; /* Transforma o texto em maiúsculo */
+}
+
+#inventory-table td {
+    background-color: #ffffff; /* Cor de fundo das células */
+    border: 1px solid #ddd; /* Borda para separar as células */
+}
+
+#inventory-table tbody tr:hover {
+    background-color: #fafafa; /* Cor de fundo ao passar o mouse */
+}
+
+#inventory-table td button {
+    padding: 8px 13px; /* Espaçamento interno dos botões */
+    background-color: #ff851b; /* Cor de fundo dos botões */
+    color: #ffffff; /* Cor do texto nos botões */
+    border: none; /* Remove borda dos botões */
+    border-radius: 4px; /* Borda arredondada dos botões */
+    cursor: pointer; /* Cursor ao passar por cima dos botões */
+    transition: background-color 0.3s ease; /* Transição suave de cor */
+}
+
+#inventory-table td button:first-child {
+    margin-right: 5px; /* Espaçamento direito entre os botões */
+}
+
+#inventory-table td button:hover {
+    background-color: #ff7701; /* Cor de fundo mais escura ao passar o mouse */
+}
+
+/* Estilos gerais */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #001f3f;
+    color: #ffffff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.title {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    font-size: 1.5em; /* Aumenta o tamanho do título */
+}
+
+.container {
+    max-width: 1300px; /* Aumenta a largura do container */
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-x: auto; /* Adiciona scroll horizontal se necessário */
+}
+
+footer {
+    background-color: #001f3f;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

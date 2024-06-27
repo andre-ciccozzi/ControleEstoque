@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Administração - Controle de Estoque</title>
+    <link rel="icon" href="/ControleEstoque-main/img/logo.png" type="image/png">
+    <link rel="stylesheet" href="/ControleEstoque-main/static/contrl.css">
+    <style>
+        /* Estilos adicionais específicos para esta página de administração */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .user-list {
+            margin-bottom: 20px;
+        }
+        .user-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .user-actions {
+            display: flex;
+            align-items: center;
+        }
+        .btn-edit {
+            margin-left: 10px;
+            padding: 6px 10px;
+            background-color: #ff851b;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="/ControleEstoque-main/img/logo.png" alt="Logo" class="logo">
+        <h1 class="title">Painel de Administração - Controle de Estoque</h1>
+    </header>
+    <div class="container">
+        <h2>Gerenciar Permissões de Usuários</h2>
+        
+        <div class="user-list">
+            <div class="user-item">
+                <span>Usuário: João da Silva</span>
+                <div class="user-actions">
+                    <span>Permissão Atual: Ver</span>
+                    <button class="btn-edit" data-user-id="joao">Habilitar Edição</button>
+                </div>
+            </div>
+            <div class="user-item">
+                <span>Usuário: Maria Oliveira</span>
+                <div class="user-actions">
+                    <span>Permissão Atual: Ver</span>
+                    <button class="btn-edit" data-user-id="maria">Habilitar Edição</button>
+                </div>
+            </div>
+            <div class="user-item">
+                <span>Usuário: José Santos</span>
+                <div class="user-actions">
+                    <span>Permissão Atual: Ver</span>
+                    <button class="btn-edit" data-user-id="jose">Habilitar Edição</button>
+                </div>
+            </div>
+            <!-- Adicionar mais usuários conforme necessário -->
+        </div>
+        
+        <button class="btn-adicionar">Adicionar Novo Usuário</button>
+    </div>
+    <footer>
+        <p>&copy; AGS Solution</p>
+    </footer>
+    
+    <script src="/ControleEstoque-main/templates/admin.js"></script>
+</body>
+</html>

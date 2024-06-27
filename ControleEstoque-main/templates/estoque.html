@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar e Gerenciar Estoque - Controle de Estoque</title>
+    <link rel="icon" href="/ControleEstoque-main/img/logo.png" type="image/png">
+    <link rel="stylesheet" href="/ControleEstoque-main/static/estoque.css">
+</head>
+<body>
+    <header>
+        <img src="/ControleEstoque-main/img/logo.png" alt="Logo" class="logo">
+        <h1 class="title"> Gerenciador de Estoque</h1>
+    </header>
+    <div class="container">
+        <h2>Lista de Itens em Estoque</h2>
+        
+        <div class="table-container">
+            <table id="inventory-table">
+                <thead>
+                    <tr>
+                        <th>Responsável</th>
+                        <th>Cargo</th>
+                        <th>Local/Obra</th>
+                        <th>Marca/Modelo</th>
+                        <th>Serial</th>
+                        <th>Sequencial</th>
+                        <th>Observação</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Linhas dinâmicas serão inseridas aqui -->
+                    <tr>
+                        <td>João da Silva</td>
+                        <td>Analista de TI</td>
+                        <td>Escritório Central</td>
+                        <td>HP Pavilion 15</td>
+                        <td>12345</td>
+                        <td>001</td>
+                        <td>Em bom estado</td>
+                        <td>
+                            <button class="btn-edit">Editar</button>
+                            <button class="btn-delete">Excluir</button>
+                        </td>
+                    </tr>
+                    <!-- Exemplo de mais uma linha -->
+                    <tr>
+                        <td>Maria Souza</td>
+                        <td>Engenheira Civil</td>
+                        <td>Construção Leste</td>
+                        <td>Dell Inspiron 14</td>
+                        <td>67890</td>
+                        <td>002</td>
+                        <td>N/A</td>
+                        <td>
+                            <button class="btn-edit">Editar</button>
+                            <button class="btn-delete">Excluir</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; AGS Solution</p>
+    </footer>
+    
+    <script src="/ControleEstoque-main/templates/estoque.js"></script>
+</body>
+</html>
