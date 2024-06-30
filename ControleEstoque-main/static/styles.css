@@ -1,115 +1,40 @@
+/* Estilos gerais */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
 }
 
-header {
-    background-color: #001f3f;
-    color: #ffffff;
-    padding: 10px;
-    text-align: center;
-}
-
-.logo {
-    width: 50px;
-    height: 50px;
-    vertical-align: middle;
-}
-
-.title {
-    display: inline-block;
-    margin-left: 10px;
-    font-size: 1.5em;
-    vertical-align: middle;
-}
-
-.container {
-    max-width: 800px;
-    margin: 20px auto;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-form {
-    margin-bottom: 20px;
-}
-
-form h2 {
-    margin-bottom: 10px;
-    color: #001f3f;
-}
-
-form label {
-    display: block;
-    margin-bottom: 5px;
-    color: #001f3f;
-}
-
-form input[type="text"],
-form input[type="number"],
-form select,
-form textarea {
+/* Estilos do formulário */
+input[type="text"], input[type="password"] {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
+    padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    font-size: 1em;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
 }
 
-form button {
-    background-color: #ff851b;
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 1em;
-}
-
-form button:hover {
-    background-color: #ff7701;
-}
-
-.import-section {
-    margin-bottom: 20px;
-}
-
-#import-btn {
-    background-color: #ff851b;
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 1em;
-}
-
-#import-btn:hover {
-    background-color: #ff7701;
-}
-
-#message {
-    margin-top: 10px;
-    padding: 10px;
-    background-color: #ff851b;
-    color: #ffffff;
-    border-radius: 4px;
-    text-align: center;
-}
-
-footer {
-    text-align: center;
-    margin-top: 20px;
-    padding: 10px;
+button[type="submit"] {
     background-color: #001f3f;
-    color: #ffffff;
-    position: fixed;
-    bottom: 0;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
     width: 100%;
+}
+
+button[type="submit"]:hover {
+    background-color: #ff851b;
+}
+
+/* Estilos de links */
+a {
+    color: #ff851b;
+}
+
+a:hover {
+    color: #ff7701;
 }
