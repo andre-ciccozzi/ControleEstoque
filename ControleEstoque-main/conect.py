@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import mysql.connector
+from time import sleep
 
 app = Flask(__name__)
 app.secret_key = 'sua_chave_secreta'
@@ -16,9 +17,6 @@ def get_db_connection():
     return mysql.connector.connect(**db_config)
 
 @app.route('/')
-def index():
-    return render_template('opcontrol.html')
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -31,10 +29,16 @@ def login():
         cursor.close()
         cnx.close()
         if user:
-            return redirect(url_for('estoque'))
+            return redirect(url_for('opcontrol'))
         else:
-            flash('Login inválido!')
+            flash('Login inválido/inexistente! Redirecionando para cadastro...')
+            sleep (1)
+            return redirect(url_for('cadastro'))
     return render_template('login.html')
+
+@app.route('/opcontrol')
+def opcontrol():
+    return render_template('opcontrol.html')
 
 @app.route('/estoque')
 def estoque():
@@ -61,6 +65,7 @@ def cadastro():
         cursor.close()
         cnx.close()
         flash('Usuário cadastrado com sucesso!')
+        sleep (2)
         return redirect(url_for('login'))
     return render_template('cadastro.html')
 
