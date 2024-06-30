@@ -5,9 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bem-vindo ao Sistema de Controle de Estoque</title>
-  <link rel="icon" href="/ControleEstoque-main/img/logo.png" type="image/png">
+  <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/png">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/ControleEstoque-main/static/styles.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
   <style>
     .bg-cover {
       background-size: cover;
@@ -15,29 +15,24 @@
   </style>
 </head>
 
-<body class="bg-cover h-screen flex items-center justify-center"
-  style="background-image: url('/ControleEstoque-main/img/showroom.jpg');">
   <div class="container mx-auto p-6 bg-white rounded-lg shadow-lg max-w-md">
     <div class="text-center mb-6">
-      <img src="/ControleEstoque-main/img/logo.png" alt="Logo" class="mx-auto h-20">
+      <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="mx-auto h-20">
       <h1 class="text-2xl font-bold text-[#001f3f] mt-4">Sistema de Controle de Estoque</h1>
     </div>
-    <form action="/login" method="POST" class="space-y-4">
+    <form action="{{ url_for('login') }}" method="POST" class="space-y-4">
       <div class="flex flex-col">
-        <label for="username" class="text-sm font-medium text-gray-700">Usuário</label>
-        <input type="text" id="username" name="username" required
-          class="px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#001f3f]">
+        <label for="email" class="text-sm font-medium text-gray-700">Email</label>
+        <input type="email" id="email" name="email" required class="px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#001f3f]">
       </div>
       <div class="flex flex-col">
         <label for="password" class="text-sm font-medium text-gray-700">Senha</label>
-        <input type="password" id="password" name="password" required
-          class="px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#001f3f]">
+        <input type="password" id="password" name="password" required class="px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#001f3f]">
       </div>
-      <button type="submit"
-        class="w-full py-2 bg-[#001f3f] text-white font-bold rounded hover:bg-[#ff851b] transition duration-300">Entrar</button>
+      <button type="submit" class="w-full py-2 bg-[#001f3f] text-white font-bold rounded hover:bg-[#ff851b] transition duration-300">Entrar</button>
     </form>
     <p class="text-center text-gray-600 mt-6">
-      Não tem uma conta? <a href="/cadastro" class="text-[#ff851b] hover:text-[#ff7701]">Cadastre-se</a>
+      Não tem uma conta? <a href="{{ url_for('cadastro') }}" class="text-[#ff851b] hover:text-[#ff7701]">Cadastre-se</a>
     </p>
   </div>
 </body>
