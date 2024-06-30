@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar e Gerenciar Estoque - Controle de Estoque</title>
+    <link rel="icon" href="/ControleEstoque-main/img/logo.png" type="image/png">
+    <link rel="stylesheet" href="/ControleEstoque-main/static/estoque.css">
+</head>
+<body>
+    <header>
+        <img src="/ControleEstoque-main/img/logo.png" alt="Logo" class="logo">
+        <h1 class="title">Equipamentos sem Patrimônio</h1>
+    </header>
+    <div class="container">
+        <h2>Lista de Equipamentos sem Patrimônio</h2>
+        
+        <div class="table-container">
+            <table id="inventory-table">
+                <thead>
+                    <tr>
+                        <th>Descrição Comercial</th>
+                        <th>Unidade</th>
+                        <th>Marca/Modelo</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Linhas dinâmicas serão inseridas aqui -->
+                    <tr>
+                        <td>TECH</td>
+                        <td>Predio B</td>
+                        <td>HP Pavilion 15</td>
+                        <td>20</td>
+                    </tr>
+                    <!-- Exemplo de mais uma linha -->
+                    <tr>
+                        <td>TECH</td>
+                        <td>Predio C</td>
+                        <td>Dell Inspiron 14</td>
+                        <td> 14 </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; AGS Solution</p>
+    </footer>
+    
+    <script src="/ControleEstoque-main/templates/estoque.js"></script>
+</body>
+</html>
