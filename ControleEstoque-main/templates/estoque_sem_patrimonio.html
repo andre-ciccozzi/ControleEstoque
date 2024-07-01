@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visualizar e Gerenciar Estoque - Controle de Estoque</title>
-    <link rel="icon" href="/ControleEstoque-main/img/logo.png" type="image/png">
-    <link rel="stylesheet" href="/ControleEstoque-main/static/estoque.css">
+    <title>Visualizar e Gerenciar Estoque - Equipamentos sem Patrimônio</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='estoque.css') }}">
 </head>
 <body>
     <header>
-        <img src="/ControleEstoque-main/img/logo.png" alt="Logo" class="logo">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="logo">
         <h1 class="title">Equipamentos sem Patrimônio</h1>
     </header>
     <div class="container">
@@ -26,20 +26,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Linhas dinâmicas serão inseridas aqui -->
+                    {% for produto in produtos_sem_patrimonio %}
                     <tr>
-                        <td>TECH</td>
-                        <td>Predio B</td>
-                        <td>HP Pavilion 15</td>
-                        <td>20</td>
+                        <td>{{ produto.DescricaoComercial }}</td>
+                        <td>{{ produto.Unidade }}</td>
+                        <td>{{ produto.MarcaModelo }}</td>
+                        <td>{{ produto.Total }}</td>
                     </tr>
-                    <!-- Exemplo de mais uma linha -->
-                    <tr>
-                        <td>TECH</td>
-                        <td>Predio C</td>
-                        <td>Dell Inspiron 14</td>
-                        <td> 14 </td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
@@ -48,6 +42,6 @@
         <p>&copy; AGS Solution</p>
     </footer>
     
-    <script src="/ControleEstoque-main/templates/estoque.js"></script>
+    <script src="{{ url_for('static', filename='estoque.js') }}"></script>
 </body>
 </html>

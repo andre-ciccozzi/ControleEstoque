@@ -15,11 +15,11 @@
         <div class="container">
             <h2>Opções:</h2>
             <div class="options">
-                <a href="estoque_com_patrimonio.html" class="option option-blue">
+                <a href="{{ url_for('estoque_com_patrimonio') }}" class="option option-blue">
                     <h3>Equipamentos com Patrimônio</h3>
                     <p>Entrada de equipamentos identificados por número de patrimônio.</p>
                 </a>
-                <a href="estoque_sem_patrimonio.html" class="option option-orange">
+                <a href="{{ url_for('estoque_sem_patrimonio') }}" class="option option-orange">
                     <h3>Equipamentos sem Patrimônio</h3>
                     <p>Entrada de equipamentos sem necessidade de identificação por patrimônio.</p>
                 </a>
