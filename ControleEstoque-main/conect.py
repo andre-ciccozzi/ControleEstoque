@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import mysql.connector
 from time import sleep
-
+#faltando: arrumar login, se usuario nao estiver no banco, pedir para cadastrarr
 app = Flask(__name__)
 app.secret_key = 'sua_chave_secreta'
 
@@ -31,10 +31,11 @@ def login():
         if user:
             return redirect(url_for('opcontrol'))
         else:
-            flash('Login inválido/inexistente! Redirecionando para cadastro...')
+            #flash('Login inválido/inexistente! Tente novamente')
             sleep (1)
-            return redirect(url_for('cadastro'))
+            #return redirect(url_for('cadastro'))
     return render_template('login.html')
+
 
 @app.route('/opcontrol')
 def opcontrol():
