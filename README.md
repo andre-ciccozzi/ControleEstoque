@@ -28,7 +28,7 @@ O ControleEstoque da AGS Solution é um software completo para gerenciar o estoq
         </thead>
         <tbody>
             <tr>
-                <td align="center">Backs</td>
+                <td align="center">Back</td>
                 <td>Alterar flask para executar ação de acrescentar e remover dados das tabelas</td>
             </tr>
             <tr>
