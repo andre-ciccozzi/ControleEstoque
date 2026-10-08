@@ -1,3 +1,34 @@
+.top-nav {
+    background: #001f3f;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 32px;
+    box-shadow: 0 4px 12px rgba(0, 31, 63, 0.18);
+}
+
+.nav-brand {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.nav-links a:hover {
+    color: #ffb36b;
+}
+
 /* Estilos gerais */
 body {
     font-family: Arial, sans-serif;

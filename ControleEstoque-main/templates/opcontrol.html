@@ -8,20 +8,28 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='opcontrol.css') }}">
 </head>
 <body>
+    <nav class="top-nav">
+        <div class="nav-brand">Controle de Estoque</div>
+        <div class="nav-links">
+            <a href="{{ url_for('contrl') }}">Painel Admin</a>
+            <a href="{{ url_for('estoque') }}">Estoque</a>
+            <a href="{{ url_for('logout') }}">Sair</a>
+        </div>
+    </nav>
     <header>
-        <h1>Escolha o Tipo de Equipamento para Entrar em Estoque</h1>
+        <h1>Escolha o caminho do sistema</h1>
     </header>
     <main>
         <div class="container">
-            <h2>Opções:</h2>
+            <h2>Fluxo do sistema</h2>
             <div class="options">
-                <a href="{{ url_for('estoque_com_patrimonio') }}" class="option option-blue">
-                    <h3>Equipamentos com Patrimônio</h3>
-                    <p>Entrada de equipamentos identificados por número de patrimônio.</p>
+                <a href="{{ url_for('contrl') }}" class="option option-blue">
+                    <h3>Painel do Administrador</h3>
+                    <p>Visualizar usuários, ações gerais e controle do estoque.</p>
                 </a>
-                <a href="{{ url_for('estoque_sem_patrimonio') }}" class="option option-orange">
-                    <h3>Equipamentos sem Patrimônio</h3>
-                    <p>Entrada de equipamentos sem necessidade de identificação por patrimônio.</p>
+                <a href="{{ url_for('estoque') }}" class="option option-orange">
+                    <h3>Área do Usuário</h3>
+                    <p>Consultar o estoque, itens com e sem patrimônio e manter o acompanhamento.</p>
                 </a>
             </div>
         </div>

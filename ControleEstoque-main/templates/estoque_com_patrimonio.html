@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Equipamentos sem Patrimônio</title>
+    <title>Equipamentos com Patrimônio</title>
     <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/png">
     <link rel="stylesheet" href="{{ url_for('static', filename='estoque.css') }}">
 </head>
@@ -20,28 +20,40 @@
     </nav>
     <header>
         <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="logo">
-        <h1 class="title">Equipamentos sem Patrimônio</h1>
+        <h1 class="title">Equipamentos com Patrimônio</h1>
     </header>
 
     <div class="container">
         <div class="panel">
-            <h2>Adicionar item sem patrimônio</h2>
-            <form action="{{ url_for('adicionar_sem_patrimonio') }}" method="POST" class="form-grid">
+            <h2>Adicionar item com patrimônio</h2>
+            <form action="{{ url_for('adicionar_com_patrimonio') }}" method="POST" class="form-grid">
                 <label class="field">
-                    <span>Descrição Comercial</span>
-                    <input type="text" name="descricao_comercial" placeholder="Ex: Papel A4, Caneta, Fita" required>
+                    <span>Responsável</span>
+                    <input type="text" name="responsavel" placeholder="Nome do responsável" required>
                 </label>
                 <label class="field">
-                    <span>Unidade</span>
-                    <input type="text" name="unidade" placeholder="Ex: Caixa, Pacote, Peça" required>
+                    <span>Cargo</span>
+                    <input type="text" name="cargo" placeholder="Ex: Engenheiro, Operador" required>
+                </label>
+                <label class="field">
+                    <span>Local/Obra</span>
+                    <input type="text" name="local_obra" placeholder="Ex: Obra Centro" required>
                 </label>
                 <label class="field">
                     <span>Marca/Modelo</span>
-                    <input type="text" name="marca_modelo" placeholder="Ex: BIC, Chamex" required>
+                    <input type="text" name="marca_modelo" placeholder="Ex: Dell Inspiron 15" required>
                 </label>
                 <label class="field">
-                    <span>Total</span>
-                    <input type="number" name="total" min="0" value="0" required>
+                    <span>Serial/Número</span>
+                    <input type="text" name="serial_numero" placeholder="Número de série">
+                </label>
+                <label class="field">
+                    <span>Sequencial</span>
+                    <input type="number" name="sequencial" min="0" value="0">
+                </label>
+                <label class="field full-width">
+                    <span>Observação</span>
+                    <textarea name="observacao" rows="3" placeholder="Descreva detalhes do equipamento"></textarea>
                 </label>
                 <button type="submit" class="btn-primary">Adicionar</button>
             </form>
@@ -57,40 +69,47 @@
             {% endif %}
         {% endwith %}
 
-        <h2>Lista de Equipamentos sem Patrimônio</h2>
+        <h2>Lista de Itens com Patrimônio</h2>
         <div class="table-container">
             <table id="inventory-table">
                 <thead>
                     <tr>
-                        <th>Descrição Comercial</th>
-                        <th>Unidade</th>
+                        <th>Responsável</th>
+                        <th>Cargo</th>
+                        <th>Local/Obra</th>
                         <th>Marca/Modelo</th>
-                        <th>Total</th>
+                        <th>Serial</th>
+                        <th>Sequencial</th>
+                        <th>Observação</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for produto in produtos_sem_patrimonio %}
+                    {% for produto in produtos_com_patrimonio %}
                     <tr>
-                        <td>{{ produto.DescricaoComercial }}</td>
-                        <td>{{ produto.Unidade }}</td>
+                        <td>{{ produto.Responsavel }}</td>
+                        <td>{{ produto.Cargo }}</td>
+                        <td>{{ produto.LocalObra }}</td>
                         <td>{{ produto.MarcaModelo }}</td>
-                        <td>{{ produto.Total }}</td>
+                        <td>{{ produto.SerialNumero }}</td>
+                        <td>{{ produto.Sequencial }}</td>
+                        <td>{{ produto.Observacao }}</td>
                         <td>
-                            <form action="{{ url_for('remover_sem_patrimonio', produto_id=produto.ProdutoID) }}" method="POST" onsubmit="return confirm('Deseja remover este item?');">
+                            <form action="{{ url_for('remover_com_patrimonio', produto_id=produto.ProdutoID) }}" method="POST" onsubmit="return confirm('Deseja remover este item?');">
                                 <button type="submit" class="btn-delete">Excluir</button>
                             </form>
                         </td>
                     </tr>
                     {% else %}
                     <tr>
-                        <td colspan="5">Nenhum item cadastrado.</td>
+                        <td colspan="8">Nenhum item cadastrado.</td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
     </div>
+
     <footer>
         <p>&copy; AGS Solution</p>
     </footer>

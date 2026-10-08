@@ -4,85 +4,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel de Administração - Controle de Estoque</title>
-    <link rel="icon" href="/ControleEstoque-main/img/logo.png" type="image/png">
-    <link rel="stylesheet" href="/ControleEstoque-main/static/contrl.css">
-    <style>
-        /* Estilos adicionais específicos para esta página de administração */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f4f4f4;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .user-list {
-            margin-bottom: 20px;
-        }
-        .user-item {
-            margin-bottom: 10px;
-            padding: 10px;
-            background-color: #ffffff;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            display: flex;
-            justify-content: space-between;
-        }
-        .user-actions {
-            display: flex;
-            align-items: center;
-        }
-        .btn-edit {
-            margin-left: 10px;
-            padding: 6px 10px;
-            background-color: #ff851b;
-            color: #ffffff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-    </style>
+    <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='contrl.css') }}">
 </head>
 <body>
-    <header>
-        <img src="/ControleEstoque-main/img/logo.png" alt="Logo" class="logo">
-        <h1 class="title">Painel de Administração - Controle de Estoque</h1>
-    </header>
-    <div class="container">
-        <h2>Gerenciar Permissões de Usuários</h2>
-        
-        <div class="user-list">
-            <div class="user-item">
-                <span>Usuário: João da Silva</span>
-                <div class="user-actions">
-                    <span>Permissão Atual: Ver</span>
-                    <button class="btn-edit" data-user-id="joao">Habilitar Edição</button>
-                </div>
-            </div>
-            <div class="user-item">
-                <span>Usuário: Maria Oliveira</span>
-                <div class="user-actions">
-                    <span>Permissão Atual: Ver</span>
-                    <button class="btn-edit" data-user-id="maria">Habilitar Edição</button>
-                </div>
-            </div>
-            <div class="user-item">
-                <span>Usuário: José Santos</span>
-                <div class="user-actions">
-                    <span>Permissão Atual: Ver</span>
-                    <button class="btn-edit" data-user-id="jose">Habilitar Edição</button>
-                </div>
-            </div>
-            <!-- Adicionar mais usuários conforme necessário -->
+    <nav class="top-nav">
+        <div class="nav-brand">Controle de Estoque</div>
+        <div class="nav-links">
+            <a href="{{ url_for('contrl') }}">Admin</a>
+            <a href="{{ url_for('estoque') }}">Estoque</a>
+            <a href="{{ url_for('opcontrol') }}">Fluxo</a>
+            <a href="{{ url_for('logout') }}">Sair</a>
         </div>
-        
-        <button class="btn-adicionar">Adicionar Novo Usuário</button>
-    </div>
+    </nav>
+    <header>
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="logo">
+        <h1 class="title">Painel de Administração</h1>
+    </header>
+
+    <main class="container">
+        <section class="hero-card">
+            <div>
+                <p class="eyebrow">Controle geral</p>
+                <h2>Gerenciador de estoque</h2>
+            </div>
+            <a href="{{ url_for('estoque') }}" class="btn-primary">Abrir estoque</a>
+        </section>
+
+        <section class="stats-grid">
+            <article class="stat-box">
+                <span>Usuários</span>
+                <strong>{{ total_usuarios }}</strong>
+            </article>
+            <article class="stat-box orange">
+                <span>Sem patrimônio</span>
+                <strong>{{ total_sem_patrimonio }}</strong>
+            </article>
+            <article class="stat-box blue">
+                <span>Com patrimônio</span>
+                <strong>{{ total_com_patrimonio }}</strong>
+            </article>
+        </section>
+
+        <section class="panel">
+            <div class="panel-header">
+                <h3>Adicionar usuário</h3>
+            </div>
+
+            <form action="{{ url_for('adicionar_usuario_admin') }}" method="POST" class="admin-form">
+                <div class="input-group">
+                    <label for="name">Nome</label>
+                    <input id="name" name="name" type="text" placeholder="Nome do usuário" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">E-mail</label>
+                    <input id="email" name="email" type="email" placeholder="usuario@email.com" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Senha</label>
+                    <input id="password" name="password" type="password" placeholder="Senha" required>
+                </div>
+                <button type="submit" class="btn-primary">Cadastrar usuário</button>
+            </form>
+        </section>
+
+        <section class="panel panel-list">
+            <div class="panel-header">
+                <h3>Usuários cadastrados</h3>
+            </div>
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="flash-message">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <div class="user-list">
+                {% for usuario in usuarios %}
+                <div class="user-item">
+                    <div>
+                        <strong>{{ usuario.name_user }}</strong>
+                        <small>{{ usuario.email_user }}</small>
+                    </div>
+                    <div class="user-actions">
+                        <span class="badge">Ativo</span>
+                        <a href="{{ url_for('estoque') }}" class="btn-edit">Gerenciar</a>
+                        <form action="{{ url_for('remover_usuario', user_id=usuario.id) }}" method="POST" onsubmit="return confirm('Deseja remover este usuário?')">
+                            <button type="submit" class="btn-danger">Excluir</button>
+                        </form>
+                    </div>
+                </div>
+                {% else %}
+                <div class="empty-state">Nenhum usuário cadastrado.</div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
     <footer>
         <p>&copy; AGS Solution</p>
     </footer>
-    
-    <script src="/ControleEstoque-main/templates/admin.js"></script>
 </body>
 </html>

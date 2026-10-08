@@ -1,147 +1,178 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
-    background-image: url('/img/showroom.jpg');
-    background-size: cover; /* Ajusta a imagem para cobrir toda a área do elemento */
-    background-repeat: no-repeat;
-    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(rgba(8, 22, 38, 0.68), rgba(8, 22, 38, 0.7)),
+        url('/static/img/showroom.jpg') center/cover no-repeat fixed;
+    color: #0f172a;
+}
+
+.topbar {
+    background: rgba(0, 31, 63, 0.92);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+}
+
+.topbar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 18px;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.nav-links a:hover {
+    color: #ffb36b;
+}
+
+.auth-page {
+    min-height: calc(100vh - 72px);
+    display: flex;
+    align-items: center;
     justify-content: center;
-    margin: 0; /* Para remover margens padrão do body */
-    padding: 0; /* Para remover preenchimentos padrão do body */
+    padding: 32px 18px;
 }
 
-.info-section {
-    color: white;
-    letter-spacing: 0.1em;
-    text-indent: 3em;
-    font-weight: 500;
+.auth-card {
+    width: min(100%, 460px);
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    border-radius: 20px;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+    padding: 32px 28px;
+    backdrop-filter: blur(4px);
 }
 
-.info-section hr {
-    border-top: 1px solid white;
+.brand-wrap {
+    text-align: center;
+    margin-bottom: 22px;
 }
 
-.btn-custom {
-    border-color: #5b287c;
-    color: #5b287c;
+.logo {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 12px;
+    display: block;
 }
 
-@media (min-width: 1920px) {
-    .card {
-        margin-bottom: -40%;
+.brand-wrap h2 {
+    margin: 0;
+    color: #001f3f;
+    font-size: clamp(1.8rem, 2vw, 2.3rem);
+}
+
+.brand-wrap p {
+    margin: 10px 0 0;
+    color: #475569;
+    font-size: 0.95rem;
+}
+
+.brand-wrap a {
+    color: #ff851b;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.field-group label {
+    color: #334155;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.field-group input {
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 1rem;
+    color: #0f172a;
+    background: #fff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field-group input:focus {
+    outline: none;
+    border-color: #ff851b;
+    box-shadow: 0 0 0 3px rgba(255, 133, 27, 0.14);
+}
+
+.primary-btn {
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #001f3f 0%, #0f4c81 100%);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 13px 18px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 10px 18px rgba(0, 31, 63, 0.2);
+}
+
+.primary-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 22px rgba(0, 31, 63, 0.22);
+}
+
+.alert-box {
+    margin-top: 18px;
+    background: #fff7ed;
+    color: #9a4d00;
+    border: 1px solid #fdba74;
+    border-radius: 12px;
+    padding: 12px 14px;
+}
+
+.alert-box ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 26px 18px;
     }
 
-    .info-section h2 hr {
-        margin-top: -200px;
+    .topbar-inner {
+        padding: 14px 16px;
     }
 
-    .info-section hr {
-        margin-top: -300px;
-    }
-    .ml-custom {
-        margin-left: 88%;
-        margin-top: -5%;
+    .nav-links {
+        gap: 10px;
+        font-size: 0.8rem;
     }
 }
 
-@media (min-width: 1440px) and (max-width: 1920px) {
-    .card {
-        margin-top: 5px;
-    }
-
-    .info-section h2 hr {
-        margin-top: -200px;
-    }
-
-    .info-section hr {
-        margin-top: -300px;
-    }
-
-    .ml-custom {
-        margin-left: 88%;
-        margin-top: -5%;
-    }
-}
-
-@media (min-width: 1024px) and (max-width: 1440px) {
-    .card {
-        margin-top: 5px;
-    }
-
-    .info-section h2 hr {
-        margin-top: -200px;
-    }
-
-    .info-section hr {
-        margin-top: -430px;
-    }
-
-    .ml-custom {
-        margin-left: 85%;
-        margin-top: -2%;
-    }
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-    .card {
-        margin-top: 5px;
-    }
-
-    .info-section h2 hr {
-        margin-top: -200px;
-    }
-
-    .info-section hr {
-        margin-top: -410px;
-    }
-
-    .ml-custom {
-        margin-left: 85%;
-        margin-top: -2%;
-    }
-}
-
-@media (max-width: 768px) {
-    .card {
-        margin-top: 5px;
-    }
-
-    .info-section h2 hr {
-        margin-top: -200px;
-    }
-
-    .info-section hr {
-        margin-top: -400px;
-    }
-
-    .ml-custom {
-        margin-left: 78%;
-        margin-top: -3%;
-    }
-}
-
-.btn-primary {
-    background-color:#ff851b; /* Altere para a cor desejada */
-    border-color: #ff851b; /* Altere para a cor desejada */
-    color: #ffffff; /* Cor do texto */
-}
-
-.btn-primary:hover {
-    background-color: #ff851b; /* Cor ao passar o mouse */
-    border-color: #ff851b /* Cor ao passar o mouse */
-}
-.btn-custom {
-    background-color: #ff5733; /* Cor de fundo personalizada */
-    border-color: #ff5733; /* Cor da borda personalizada */
-    color: #ffffff; /* Cor do texto personalizada */
-}
-
-.btn-custom:hover {
-    background-color: #e04e2a; /* Cor de fundo ao passar o mouse */
-    border-color: #e04e2a; /* Cor da borda ao passar o mouse */
-    color: #ffffff; /* Cor do texto ao passar o mouse */
-}
-
-.btn-custom:focus, .btn-custom:active {
-    background-color: #c94421; /* Cor de fundo ao focar ou clicar */
-    border-color: #c94421; /* Cor da borda ao focar ou clicar */
-    color: #ffffff; /* Cor do texto ao focar ou clicar */
-}
