@@ -3,69 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visualizar e Gerenciar Estoque - Controle de Estoque</title>
-    <link rel="icon" href="/ControleEstoque-main/img/logo.png" type="image/png">
-    <link rel="stylesheet" href="/ControleEstoque-main/static/estoque.css">
+    <title>Gerenciador de Estoque</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='estoque.css') }}">
 </head>
 <body>
+    <nav class="top-nav">
+        <div class="nav-brand">Controle de Estoque</div>
+        <div class="nav-links">
+            <a href="{{ url_for('estoque') }}">Estoque</a>
+            <a href="{{ url_for('estoque_com_patrimonio') }}">Com patrimônio</a>
+            <a href="{{ url_for('estoque_sem_patrimonio') }}">Sem patrimônio</a>
+            <a href="{{ url_for('contrl') }}">Admin</a>
+            <a href="{{ url_for('logout') }}">Sair</a>
+        </div>
+    </nav>
     <header>
-        <img src="/ControleEstoque-main/img/logo.png" alt="Logo" class="logo">
-        <h1 class="title"> Gerenciador de Estoque</h1>
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="logo">
+        <h1 class="title">Gerenciador de Estoque</h1>
     </header>
+
     <div class="container">
-        <h2>Lista de Itens em Estoque</h2>
-        
-        <div class="table-container">
-            <table id="inventory-table">
+        <div class="page-header">
+            <div>
+                <p class="eyebrow">Visão geral</p>
+                <h2>Resumo do Estoque</h2>
+            </div>
+            <div class="action-bar">
+                <a class="btn-secondary" href="{{ url_for('exportar_excel', tipo='todos') }}">Baixar Excel</a>
+            </div>
+        </div>
+
+        <div class="summary-boxes">
+            <div class="summary-box">
+                <span>Sem patrimônio</span>
+                <strong>{{ produtos_sem_patrimonio|length }}</strong>
+            </div>
+            <div class="summary-box orange">
+                <span>Com patrimônio</span>
+                <strong>{{ produtos_com_patrimonio|length }}</strong>
+            </div>
+            <div class="summary-box accent">
+                <span>Painel</span>
+                <a href="{{ url_for('contrl') }}">Abrir controle</a>
+            </div>
+        </div>
+
+        <div class="section-block">
+            <div class="section-header">
+                <h3>Itens sem patrimônio</h3>
+                <a class="btn-mini" href="{{ url_for('exportar_excel', tipo='sem') }}">Exportar sem patrimônio</a>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Unidade</th>
+                        <th>Marca</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in produtos_sem_patrimonio %}
+                    <tr>
+                        <td>{{ item.DescricaoComercial }}</td>
+                        <td>{{ item.Unidade }}</td>
+                        <td>{{ item.MarcaModelo }}</td>
+                        <td>{{ item.Total }}</td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="4">Nenhum item.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-block">
+            <div class="section-header">
+                <h3>Itens com patrimônio</h3>
+                <a class="btn-mini" href="{{ url_for('exportar_excel', tipo='com') }}">Exportar com patrimônio</a>
+            </div>
+            <table>
                 <thead>
                     <tr>
                         <th>Responsável</th>
                         <th>Cargo</th>
-                        <th>Local/Obra</th>
-                        <th>Marca/Modelo</th>
+                        <th>Local</th>
+                        <th>Marca</th>
                         <th>Serial</th>
-                        <th>Sequencial</th>
-                        <th>Observação</th>
-                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Linhas dinâmicas serão inseridas aqui -->
+                    {% for item in produtos_com_patrimonio %}
                     <tr>
-                        <td>João da Silva</td>
-                        <td>Analista de TI</td>
-                        <td>Escritório Central</td>
-                        <td>HP Pavilion 15</td>
-                        <td>12345</td>
-                        <td>001</td>
-                        <td>Em bom estado</td>
-                        <td>
-                            <button class="btn-edit">Editar</button>
-                            <button class="btn-delete">Excluir</button>
-                        </td>
+                        <td>{{ item.Responsavel }}</td>
+                        <td>{{ item.Cargo }}</td>
+                        <td>{{ item.LocalObra }}</td>
+                        <td>{{ item.MarcaModelo }}</td>
+                        <td>{{ item.SerialNumero }}</td>
                     </tr>
-                    <!-- Exemplo de mais uma linha -->
-                    <tr>
-                        <td>Maria Souza</td>
-                        <td>Engenheira Civil</td>
-                        <td>Construção Leste</td>
-                        <td>Dell Inspiron 14</td>
-                        <td>67890</td>
-                        <td>002</td>
-                        <td>N/A</td>
-                        <td>
-                            <button class="btn-edit">Editar</button>
-                            <button class="btn-delete">Excluir</button>
-                        </td>
-                    </tr>
+                    {% else %}
+                    <tr><td colspan="5">Nenhum item.</td></tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
     </div>
+
     <footer>
         <p>&copy; AGS Solution</p>
     </footer>
-    
-    <script src="/ControleEstoque-main/templates/estoque.js"></script>
 </body>
 </html>
