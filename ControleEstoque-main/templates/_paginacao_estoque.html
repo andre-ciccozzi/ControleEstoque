@@ -1,0 +1,18 @@
+<div class="pagination-bar">
+    <p class="pagination-count">Exibindo {{ paginacao.inicio }} a {{ paginacao.fim }} de {{ paginacao.total }} itens.</p>
+    <nav class="pagination-controls" aria-label="Paginação de {{ titulo_paginacao|default('itens do estoque') }}">
+        {% if paginacao.anterior %}
+        <a href="{{ paginacao.primeira }}">Primeira</a>
+        <a href="{{ paginacao.anterior }}" rel="prev">Anterior</a>
+        {% else %}
+        <span aria-disabled="true">Anterior</span>
+        {% endif %}
+        <span class="pagination-current" aria-current="page">Página {{ paginacao.pagina }} de {{ paginacao.paginas }}</span>
+        {% if paginacao.proxima %}
+        <a href="{{ paginacao.proxima }}" rel="next">Próxima</a>
+        <a href="{{ paginacao.ultima }}">Última</a>
+        {% else %}
+        <span aria-disabled="true">Próxima</span>
+        {% endif %}
+    </nav>
+</div>

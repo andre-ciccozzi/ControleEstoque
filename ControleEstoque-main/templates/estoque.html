@@ -14,7 +14,7 @@
             <a href="{{ url_for('estoque') }}">Estoque</a>
             <a href="{{ url_for('estoque_com_patrimonio') }}">Com patrimônio</a>
             <a href="{{ url_for('estoque_sem_patrimonio') }}">Sem patrimônio</a>
-            <a href="{{ url_for('contrl') }}">Admin</a>
+            {% if current_user.role_user == 'admin' %}<a href="{{ url_for('contrl') }}">Admin</a>{% endif %}
             <a href="{{ url_for('logout') }}">Sair</a>
         </div>
     </nav>
@@ -27,34 +27,58 @@
         <div class="page-header">
             <div>
                 <p class="eyebrow">Visão geral</p>
-                <h2>Resumo do Estoque</h2>
-            </div>
-            <div class="action-bar">
-                <a class="btn-secondary" href="{{ url_for('exportar_excel', tipo='todos') }}">Baixar Excel</a>
+                <h2>Estoque completo</h2>
             </div>
         </div>
+
+        <section class="panel download-panel" aria-labelledby="download-heading">
+            <h3 id="download-heading">Baixar planilhas do estoque</h3>
+            <p>Escolha o conteúdo da planilha. Os downloads incluem todos os registros da categoria, independentemente dos filtros ou da página exibida.</p>
+            <div class="download-options">
+                <a class="btn-secondary" href="{{ url_for('exportar_excel', tipo='todos') }}">
+                    <span>Baixar planilha completa</span>
+                    <small>{{ total_sem_patrimonio + total_com_patrimonio }} itens · com e sem patrimônio em duas abas</small>
+                </a>
+                <a class="btn-mini" href="{{ url_for('exportar_excel', tipo='sem') }}">
+                    <span>Baixar sem patrimônio</span>
+                    <small>{{ total_sem_patrimonio }} itens · somente sem patrimônio</small>
+                </a>
+                <a class="btn-mini" href="{{ url_for('exportar_excel', tipo='com') }}">
+                    <span>Baixar com patrimônio</span>
+                    <small>{{ total_com_patrimonio }} itens · somente com patrimônio</small>
+                </a>
+            </div>
+        </section>
 
         <div class="summary-boxes">
             <div class="summary-box">
                 <span>Sem patrimônio</span>
-                <strong>{{ produtos_sem_patrimonio|length }}</strong>
+                <strong>{{ total_sem_patrimonio }}</strong>
             </div>
             <div class="summary-box orange">
                 <span>Com patrimônio</span>
-                <strong>{{ produtos_com_patrimonio|length }}</strong>
+                <strong>{{ total_com_patrimonio }}</strong>
             </div>
             <div class="summary-box accent">
+                {% if current_user.role_user == 'admin' %}
                 <span>Painel</span>
                 <a href="{{ url_for('contrl') }}">Abrir controle</a>
+                {% else %}
+                <span>Minha conta</span>
+                <strong>{{ current_user.name_user }}</strong>
+                {% endif %}
             </div>
         </div>
 
+        {% include '_filtros_estoque.html' %}
+
+        {% if filtros.tipo != 'com' %}
         <div class="section-block">
             <div class="section-header">
-                <h3>Itens sem patrimônio</h3>
-                <a class="btn-mini" href="{{ url_for('exportar_excel', tipo='sem') }}">Exportar sem patrimônio</a>
+                <h3>Itens sem patrimônio ({{ paginacao_sem.total }})</h3>
             </div>
-            <table>
+            <div class="table-container">
+            <table id="stock-sem-table">
                 <thead>
                     <tr>
                         <th>Descrição</th>
@@ -72,18 +96,24 @@
                         <td>{{ item.Total }}</td>
                     </tr>
                     {% else %}
-                    <tr><td colspan="4">Nenhum item.</td></tr>
+                    <tr><td colspan="4">{{ 'Nenhum item encontrado para os filtros informados.' if filtros.busca else 'Nenhum item cadastrado.' }}</td></tr>
                     {% endfor %}
                 </tbody>
             </table>
+            </div>
+            {% with paginacao=paginacao_sem, titulo_paginacao='itens sem patrimônio' %}
+                {% include '_paginacao_estoque.html' %}
+            {% endwith %}
         </div>
+        {% endif %}
 
+        {% if filtros.tipo != 'sem' %}
         <div class="section-block">
             <div class="section-header">
-                <h3>Itens com patrimônio</h3>
-                <a class="btn-mini" href="{{ url_for('exportar_excel', tipo='com') }}">Exportar com patrimônio</a>
+                <h3>Itens com patrimônio ({{ paginacao_com.total }})</h3>
             </div>
-            <table>
+            <div class="table-container">
+            <table id="stock-com-table">
                 <thead>
                     <tr>
                         <th>Responsável</th>
@@ -91,6 +121,8 @@
                         <th>Local</th>
                         <th>Marca</th>
                         <th>Serial</th>
+                        <th>Sequencial</th>
+                        <th>Observação</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -101,13 +133,20 @@
                         <td>{{ item.LocalObra }}</td>
                         <td>{{ item.MarcaModelo }}</td>
                         <td>{{ item.SerialNumero }}</td>
+                        <td>{{ item.Sequencial }}</td>
+                        <td>{{ item.Observacao }}</td>
                     </tr>
                     {% else %}
-                    <tr><td colspan="5">Nenhum item.</td></tr>
+                    <tr><td colspan="7">{{ 'Nenhum item encontrado para os filtros informados.' if filtros.busca else 'Nenhum item cadastrado.' }}</td></tr>
                     {% endfor %}
                 </tbody>
             </table>
+            </div>
+            {% with paginacao=paginacao_com, titulo_paginacao='itens com patrimônio' %}
+                {% include '_paginacao_estoque.html' %}
+            {% endwith %}
         </div>
+        {% endif %}
     </div>
 
     <footer>

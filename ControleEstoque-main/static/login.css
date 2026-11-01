@@ -84,6 +84,11 @@ body {
     font-size: clamp(1.5rem, 2vw, 2.2rem);
 }
 
+.brand-wrap p {
+    color: #475569;
+    line-height: 1.6;
+}
+
 .auth-form {
     display: flex;
     flex-direction: column;
@@ -154,6 +159,7 @@ body {
 }
 
 .alert-box {
+    margin-bottom: 18px;
     margin-top: 18px;
     background: #fff7ed;
     color: #9a4d00;

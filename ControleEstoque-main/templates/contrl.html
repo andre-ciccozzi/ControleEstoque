@@ -13,7 +13,7 @@
         <div class="nav-links">
             <a href="{{ url_for('contrl') }}">Admin</a>
             <a href="{{ url_for('estoque') }}">Estoque</a>
-            <a href="{{ url_for('opcontrol') }}">Fluxo</a>
+            <a href="{{ url_for('index') }}">Início</a>
             <a href="{{ url_for('logout') }}">Sair</a>
         </div>
     </nav>
@@ -23,9 +23,16 @@
     </header>
 
     <main class="container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-message" role="status">
+                    {% for message in messages %}<p>{{ message }}</p>{% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
         <section class="hero-card">
             <div>
-                <p class="eyebrow">Controle geral</p>
+                <p class="eyebrow">Olá, {{ current_user.name_user }}</p>
                 <h2>Gerenciador de estoque</h2>
             </div>
             <a href="{{ url_for('estoque') }}" class="btn-primary">Abrir estoque</a>
@@ -35,6 +42,11 @@
             <article class="stat-box">
                 <span>Usuários</span>
                 <strong>{{ total_usuarios }}</strong>
+            </article>
+            <article class="stat-box pending">
+                <span>Aguardando aprovação</span>
+                <strong>{{ total_pendentes }}</strong>
+                <a href="#solicitacoes">Ver solicitações</a>
             </article>
             <article class="stat-box orange">
                 <span>Sem patrimônio</span>
@@ -46,12 +58,48 @@
             </article>
         </section>
 
+        <section class="panel" id="solicitacoes">
+            <div class="panel-header">
+                <h3>Solicitações de acesso</h3>
+            </div>
+            <p>Confira a pessoa e escolha o perfil antes de aprovar. Contas pendentes não têm acesso ao sistema.</p>
+            <div class="user-list">
+                {% for usuario in pendentes %}
+                <div class="user-item">
+                    <div class="user-info">
+                        <strong>{{ usuario.name_user }}</strong>
+                        <small>{{ usuario.email_user }}</small>
+                        <span class="badge badge-pending">Pendente</span>
+                    </div>
+                    <div class="user-actions">
+                        <form action="{{ url_for('aprovar_usuario', user_id=usuario.id) }}" method="POST" class="role-form">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <label for="approve-role-{{ usuario.id }}">Aprovar como</label>
+                            <select id="approve-role-{{ usuario.id }}" name="role" required>
+                                <option value="user">Usuário</option>
+                                <option value="admin">Administrador</option>
+                            </select>
+                            <button type="submit" class="btn-primary">Aprovar conta</button>
+                        </form>
+                        <form action="{{ url_for('remover_usuario', user_id=usuario.id) }}" method="POST" onsubmit="return confirm('Deseja rejeitar esta solicitação?');">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button type="submit" class="btn-danger">Rejeitar</button>
+                        </form>
+                    </div>
+                </div>
+                {% else %}
+                <div class="empty-state">Nenhuma solicitação aguardando aprovação.</div>
+                {% endfor %}
+            </div>
+        </section>
+
         <section class="panel">
             <div class="panel-header">
-                <h3>Adicionar usuário</h3>
+                <h3>Criar conta aprovada</h3>
             </div>
 
             <form action="{{ url_for('adicionar_usuario_admin') }}" method="POST" class="admin-form">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <div class="input-group">
                     <label for="name">Nome</label>
                     <input id="name" name="name" type="text" placeholder="Nome do usuário" required>
@@ -62,40 +110,50 @@
                 </div>
                 <div class="input-group">
                     <label for="password">Senha</label>
-                    <input id="password" name="password" type="password" placeholder="Senha" required>
+                    <input id="password" name="password" type="password" placeholder="Senha" autocomplete="new-password" required>
                 </div>
-                <button type="submit" class="btn-primary">Cadastrar usuário</button>
+                <div class="input-group">
+                    <label for="new-role">Perfil de acesso</label>
+                    <select id="new-role" name="role" required>
+                        <option value="user">Usuário</option>
+                        <option value="admin">Administrador</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Criar e aprovar</button>
             </form>
         </section>
 
         <section class="panel panel-list">
             <div class="panel-header">
-                <h3>Usuários cadastrados</h3>
+                <h3>Contas aprovadas</h3>
             </div>
-
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    <div class="flash-message">
-                        {% for message in messages %}
-                            <p>{{ message }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            {% endwith %}
 
             <div class="user-list">
                 {% for usuario in usuarios %}
                 <div class="user-item">
-                    <div>
+                    <div class="user-info">
                         <strong>{{ usuario.name_user }}</strong>
                         <small>{{ usuario.email_user }}</small>
+                        <span class="badge {{ 'badge-admin' if usuario.role_user == 'admin' else '' }}">{{ 'Administrador' if usuario.role_user == 'admin' else 'Usuário' }}</span>
                     </div>
                     <div class="user-actions">
-                        <span class="badge">Ativo</span>
-                        <a href="{{ url_for('estoque') }}" class="btn-edit">Gerenciar</a>
+                        {% if usuario.id == current_user.id %}
+                        <span class="self-label">Sua conta</span>
+                        {% else %}
+                        <form action="{{ url_for('alterar_perfil_usuario', user_id=usuario.id) }}" method="POST" class="role-form">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <label for="role-{{ usuario.id }}">Perfil</label>
+                            <select id="role-{{ usuario.id }}" name="role" required>
+                                <option value="user" {% if usuario.role_user == 'user' %}selected{% endif %}>Usuário</option>
+                                <option value="admin" {% if usuario.role_user == 'admin' %}selected{% endif %}>Administrador</option>
+                            </select>
+                            <button type="submit" class="btn-edit">Salvar perfil</button>
+                        </form>
                         <form action="{{ url_for('remover_usuario', user_id=usuario.id) }}" method="POST" onsubmit="return confirm('Deseja remover este usuário?')">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                             <button type="submit" class="btn-danger">Excluir</button>
                         </form>
+                        {% endif %}
                     </div>
                 </div>
                 {% else %}

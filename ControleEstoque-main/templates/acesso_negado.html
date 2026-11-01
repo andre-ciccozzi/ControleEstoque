@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso restrito | Controle de Estoque</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+<body>
+    <main class="auth-page">
+        <div class="auth-card">
+            <div class="brand-wrap">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo AGS Solution" class="logo">
+                <h1>Acesso restrito</h1>
+                <p>{{ mensagem }}</p>
+            </div>
+            <p class="helper-text"><a href="{{ url_for('estoque') if current_user else url_for('index') }}">{{ 'Voltar ao estoque' if current_user else 'Escolher área de acesso' }}</a></p>
+        </div>
+    </main>
+</body>
+</html>

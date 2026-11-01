@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro | Controle de Estoque</title>
     <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/png">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='cadastro.css') }}">
 </head>
 
@@ -15,8 +14,8 @@
         <div class="topbar-inner">
             <div class="brand">Controle de Estoque</div>
             <div class="nav-links">
-                <a href="{{ url_for('login') }}">Login</a>
-                <a href="{{ url_for('cadastro') }}">Cadastro</a>
+                <a href="{{ url_for('index') }}">Início</a>
+                <a href="{{ url_for('login', perfil='user') }}">Login</a>
             </div>
         </div>
     </nav>
@@ -27,17 +26,19 @@
                 <a href="{{ url_for('cadastro') }}">
                     <img class="logo" src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo">
                 </a>
-                <h2>Crie sua conta</h2>
+                <h2>Solicite sua conta</h2>
+                <p>Seu cadastro será analisado por um administrador. Após a aprovação, você poderá entrar no sistema.</p>
                 <p>
                     Já tem uma conta?
-                    <a href="{{ url_for('login') }}">Faça login</a>
+                    <a href="{{ url_for('index') }}">Escolha sua área de acesso</a>
                 </p>
             </div>
 
             <form class="auth-form" id="userForm" action="{{ url_for('cadastro') }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <div class="field-group">
                     <label for="user">Usuário</label>
-                    <input id="user" name="name" type="text" autocomplete="user" required placeholder="Usuário">
+                    <input id="user" name="name" type="text" autocomplete="name" required placeholder="Seu nome">
                 </div>
 
                 <div class="field-group">
@@ -47,10 +48,10 @@
 
                 <div class="field-group">
                     <label for="password">Senha</label>
-                    <input id="password" name="password" type="password" autocomplete="current-password" required placeholder="Senha">
+                    <input id="password" name="password" type="password" autocomplete="new-password" required placeholder="Senha">
                 </div>
 
-                <button type="submit" class="primary-btn">Confirmar</button>
+                <button type="submit" class="primary-btn">Enviar solicitação</button>
             </form>
 
             {% with messages = get_flashed_messages() %}

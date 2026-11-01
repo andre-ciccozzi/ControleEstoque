@@ -9,3 +9,15 @@ venv/
 .env
 .pytest_cache/
 .DS_Store
+config.local.json
+backups/
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite3-journal
+*.sqlite3-wal
+*.sqlite3-shm
+.coverage
+htmlcov/
+.vscode/
+*.log

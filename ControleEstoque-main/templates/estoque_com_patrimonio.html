@@ -14,7 +14,7 @@
             <a href="{{ url_for('estoque') }}">Estoque</a>
             <a href="{{ url_for('estoque_com_patrimonio') }}">Com patrimônio</a>
             <a href="{{ url_for('estoque_sem_patrimonio') }}">Sem patrimônio</a>
-            <a href="{{ url_for('contrl') }}">Admin</a>
+            {% if current_user.role_user == 'admin' %}<a href="{{ url_for('contrl') }}">Admin</a>{% endif %}
             <a href="{{ url_for('logout') }}">Sair</a>
         </div>
     </nav>
@@ -25,37 +25,43 @@
 
     <div class="container">
         <div class="panel">
-            <h2>Adicionar item com patrimônio</h2>
-            <form action="{{ url_for('adicionar_com_patrimonio') }}" method="POST" class="form-grid">
+            <h2>{{ 'Editar' if produto_edicao else 'Adicionar' }} item com patrimônio</h2>
+            <form action="{{ url_for('editar_com_patrimonio', produto_id=produto_edicao.ProdutoID, **filtros_url) if produto_edicao else url_for('adicionar_com_patrimonio', **filtros_url) }}" method="POST" class="form-grid">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <label class="field">
                     <span>Responsável</span>
-                    <input type="text" name="responsavel" placeholder="Nome do responsável" required>
+                    <input type="text" name="responsavel" placeholder="Nome do responsável" value="{{ produto_edicao.Responsavel or '' if produto_edicao else '' }}" required>
                 </label>
                 <label class="field">
                     <span>Cargo</span>
-                    <input type="text" name="cargo" placeholder="Ex: Engenheiro, Operador" required>
+                    <input type="text" name="cargo" placeholder="Ex: Engenheiro, Operador" value="{{ produto_edicao.Cargo or '' if produto_edicao else '' }}" required>
                 </label>
                 <label class="field">
                     <span>Local/Obra</span>
-                    <input type="text" name="local_obra" placeholder="Ex: Obra Centro" required>
+                    <input type="text" name="local_obra" placeholder="Ex: Obra Centro" value="{{ produto_edicao.LocalObra or '' if produto_edicao else '' }}" required>
                 </label>
                 <label class="field">
                     <span>Marca/Modelo</span>
-                    <input type="text" name="marca_modelo" placeholder="Ex: Dell Inspiron 15" required>
+                    <input type="text" name="marca_modelo" placeholder="Ex: Dell Inspiron 15" value="{{ produto_edicao.MarcaModelo or '' if produto_edicao else '' }}" required>
                 </label>
                 <label class="field">
                     <span>Serial/Número</span>
-                    <input type="text" name="serial_numero" placeholder="Número de série">
+                    <input type="text" name="serial_numero" placeholder="Número de série" value="{{ produto_edicao.SerialNumero or '' if produto_edicao else '' }}">
                 </label>
                 <label class="field">
                     <span>Sequencial</span>
-                    <input type="number" name="sequencial" min="0" value="0">
+                    <input type="number" name="sequencial" min="0" value="{{ produto_edicao.Sequencial if produto_edicao else 0 }}">
                 </label>
                 <label class="field full-width">
                     <span>Observação</span>
-                    <textarea name="observacao" rows="3" placeholder="Descreva detalhes do equipamento"></textarea>
+                    <textarea name="observacao" rows="3" placeholder="Descreva detalhes do equipamento">{{ produto_edicao.Observacao or '' if produto_edicao else '' }}</textarea>
                 </label>
-                <button type="submit" class="btn-primary">Adicionar</button>
+                <div class="form-actions full-width">
+                    <button type="submit" class="btn-primary">{{ 'Salvar alterações' if produto_edicao else 'Adicionar' }}</button>
+                    {% if produto_edicao %}
+                    <a href="{{ url_for('estoque_com_patrimonio', **filtros_url) }}" class="btn-cancel">Cancelar</a>
+                    {% endif %}
+                </div>
             </form>
         </div>
 
@@ -70,6 +76,7 @@
         {% endwith %}
 
         <h2>Lista de Itens com Patrimônio</h2>
+        {% include '_filtros_estoque.html' %}
         <div class="table-container">
             <table id="inventory-table">
                 <thead>
@@ -95,19 +102,24 @@
                         <td>{{ produto.Sequencial }}</td>
                         <td>{{ produto.Observacao }}</td>
                         <td>
-                            <form action="{{ url_for('remover_com_patrimonio', produto_id=produto.ProdutoID) }}" method="POST" onsubmit="return confirm('Deseja remover este item?');">
-                                <button type="submit" class="btn-delete">Excluir</button>
-                            </form>
+                            <div class="item-actions">
+                                <a href="{{ url_for('editar_com_patrimonio', produto_id=produto.ProdutoID, **filtros_url) }}" class="btn-edit">Editar</a>
+                                <form action="{{ url_for('remover_com_patrimonio', produto_id=produto.ProdutoID, **filtros_url) }}" method="POST" onsubmit="return confirm('Deseja remover este item?');">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                    <button type="submit" class="btn-delete">Excluir</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     {% else %}
                     <tr>
-                        <td colspan="8">Nenhum item cadastrado.</td>
+                        <td colspan="8">{{ 'Nenhum item encontrado para os filtros informados.' if filtros.busca else 'Nenhum item cadastrado.' }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
+        {% include '_paginacao_estoque.html' %}
     </div>
 
     <footer>

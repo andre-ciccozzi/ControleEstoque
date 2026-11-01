@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha seu acesso | Controle de Estoque</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+    <nav class="topbar">
+        <div class="topbar-inner">
+            <div class="brand">Controle de Estoque</div>
+            <div class="nav-links">
+                <a href="{{ url_for('cadastro') }}">Solicitar conta</a>
+                {% if current_user %}<a href="{{ url_for('logout') }}">Sair</a>{% endif %}
+            </div>
+        </div>
+    </nav>
+    <main class="auth-page">
+        <div class="auth-card access-card">
+            <div class="brand-wrap">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo AGS Solution" class="logo">
+                <p class="access-eyebrow">AGS Solution</p>
+                <h1>Como deseja acessar?</h1>
+                <p>Escolha sua área para entrar no Controle de Estoque.</p>
+            </div>
+            <div class="access-options">
+                <a class="access-option admin-option" href="{{ url_for('contrl') if current_user and current_user.role_user == 'admin' else url_for('login', perfil='admin') }}">
+                    <span class="access-label">Gestão de acessos</span>
+                    <h2>Administrador</h2>
+                    <p>Aprove novas contas, defina os perfis e gerencie o estoque.</p>
+                    <span class="access-link">Acessar administração </span>
+                </a>
+                <a class="access-option user-option" href="{{ url_for('estoque') if current_user else url_for('login', perfil='user') }}">
+                    <span class="access-label">Dia a dia</span>
+                    <h2>Usuário</h2>
+                    <p>Consulte e organize os itens com e sem patrimônio.</p>
+                    <span class="access-link">Acessar estoque </span>
+                </a>
+            </div>
+            <p class="helper-text">Ainda não tem acesso? <a href="{{ url_for('cadastro') }}">Solicite sua conta</a>.</p>
+            <p class="approval-note">Novas contas precisam da aprovação de um administrador.</p>
+            {% if current_user %}<p class="approval-note">Conectado como {{ current_user.name_user }}.</p>{% endif %}
+        </div>
+    </main>
+</body>
+</html>
