@@ -14,7 +14,7 @@
             <a href="{{ url_for('estoque') }}">Estoque</a>
             <a href="{{ url_for('estoque_com_patrimonio') }}">Com patrimônio</a>
             <a href="{{ url_for('estoque_sem_patrimonio') }}">Sem patrimônio</a>
-            <a href="{{ url_for('contrl') }}">Admin</a>
+            {% if current_user.role_user == 'admin' %}<a href="{{ url_for('contrl') }}">Admin</a>{% endif %}
             <a href="{{ url_for('logout') }}">Sair</a>
         </div>
     </nav>
@@ -25,25 +25,31 @@
 
     <div class="container">
         <div class="panel">
-            <h2>Adicionar item sem patrimônio</h2>
-            <form action="{{ url_for('adicionar_sem_patrimonio') }}" method="POST" class="form-grid">
+            <h2>{{ 'Editar' if produto_edicao else 'Adicionar' }} item sem patrimônio</h2>
+            <form action="{{ url_for('editar_sem_patrimonio', produto_id=produto_edicao.ProdutoID, **filtros_url) if produto_edicao else url_for('adicionar_sem_patrimonio', **filtros_url) }}" method="POST" class="form-grid">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <label class="field">
                     <span>Descrição Comercial</span>
-                    <input type="text" name="descricao_comercial" placeholder="Ex: Papel A4, Caneta, Fita" required>
+                    <input type="text" name="descricao_comercial" placeholder="Ex: Papel A4, Caneta, Fita" value="{{ produto_edicao.DescricaoComercial or '' if produto_edicao else '' }}" required>
                 </label>
                 <label class="field">
                     <span>Unidade</span>
-                    <input type="text" name="unidade" placeholder="Ex: Caixa, Pacote, Peça" required>
+                    <input type="text" name="unidade" placeholder="Ex: Caixa, Pacote, Peça" value="{{ produto_edicao.Unidade or '' if produto_edicao else '' }}" required>
                 </label>
                 <label class="field">
                     <span>Marca/Modelo</span>
-                    <input type="text" name="marca_modelo" placeholder="Ex: BIC, Chamex" required>
+                    <input type="text" name="marca_modelo" placeholder="Ex: BIC, Chamex" value="{{ produto_edicao.MarcaModelo or '' if produto_edicao else '' }}" required>
                 </label>
                 <label class="field">
                     <span>Total</span>
-                    <input type="number" name="total" min="0" value="0" required>
+                    <input type="number" name="total" min="0" value="{{ produto_edicao.Total if produto_edicao else 0 }}" required>
                 </label>
-                <button type="submit" class="btn-primary">Adicionar</button>
+                <div class="form-actions full-width">
+                    <button type="submit" class="btn-primary">{{ 'Salvar alterações' if produto_edicao else 'Adicionar' }}</button>
+                    {% if produto_edicao %}
+                    <a href="{{ url_for('estoque_sem_patrimonio', **filtros_url) }}" class="btn-cancel">Cancelar</a>
+                    {% endif %}
+                </div>
             </form>
         </div>
 
@@ -58,6 +64,7 @@
         {% endwith %}
 
         <h2>Lista de Equipamentos sem Patrimônio</h2>
+        {% include '_filtros_estoque.html' %}
         <div class="table-container">
             <table id="inventory-table">
                 <thead>
@@ -77,19 +84,24 @@
                         <td>{{ produto.MarcaModelo }}</td>
                         <td>{{ produto.Total }}</td>
                         <td>
-                            <form action="{{ url_for('remover_sem_patrimonio', produto_id=produto.ProdutoID) }}" method="POST" onsubmit="return confirm('Deseja remover este item?');">
-                                <button type="submit" class="btn-delete">Excluir</button>
-                            </form>
+                            <div class="item-actions">
+                                <a href="{{ url_for('editar_sem_patrimonio', produto_id=produto.ProdutoID, **filtros_url) }}" class="btn-edit">Editar</a>
+                                <form action="{{ url_for('remover_sem_patrimonio', produto_id=produto.ProdutoID, **filtros_url) }}" method="POST" onsubmit="return confirm('Deseja remover este item?');">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                    <button type="submit" class="btn-delete">Excluir</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     {% else %}
                     <tr>
-                        <td colspan="5">Nenhum item cadastrado.</td>
+                        <td colspan="5">{{ 'Nenhum item encontrado para os filtros informados.' if filtros.busca else 'Nenhum item cadastrado.' }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
+        {% include '_paginacao_estoque.html' %}
     </div>
     <footer>
         <p>&copy; AGS Solution</p>

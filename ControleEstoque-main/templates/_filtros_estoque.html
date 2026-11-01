@@ -1,0 +1,41 @@
+<section class="panel filter-panel" aria-labelledby="filter-heading">
+    <h3 id="filter-heading">Filtrar itens</h3>
+    <form action="{{ url_for(rota_estoque) }}" method="GET" class="stock-filters{% if filtros.tipo is defined %} stock-filters--complete{% endif %}" role="search">
+        <label class="field filter-search">
+            <span>O que deseja encontrar?</span>
+            <input type="search" name="busca" value="{{ filtros.busca }}" placeholder="Digite uma palavra ou parte do texto">
+        </label>
+        <label class="field">
+            <span>Buscar em</span>
+            <select name="campo">
+                <option value="todos" {% if filtros.campo == 'todos' %}selected{% endif %}>Todos os campos</option>
+                {% for valor, nome in campos_filtro.items() %}
+                <option value="{{ valor }}" {% if filtros.campo == valor %}selected{% endif %}>{{ nome }}</option>
+                {% endfor %}
+            </select>
+        </label>
+        {% if filtros.tipo is defined %}
+        <label class="field">
+            <span>Tipo de item</span>
+            <select name="tipo">
+                <option value="todos" {% if filtros.tipo == 'todos' %}selected{% endif %}>Estoque completo</option>
+                <option value="sem" {% if filtros.tipo == 'sem' %}selected{% endif %}>Sem patrimônio</option>
+                <option value="com" {% if filtros.tipo == 'com' %}selected{% endif %}>Com patrimônio</option>
+            </select>
+        </label>
+        {% endif %}
+        <label class="field">
+            <span>Itens por página</span>
+            <select name="por_pagina">
+                {% for quantidade in (20, 50, 100) %}
+                <option value="{{ quantidade }}" {% if por_pagina == quantidade %}selected{% endif %}>{{ quantidade }}</option>
+                {% endfor %}
+            </select>
+        </label>
+        <div class="filter-actions">
+            <button type="submit" class="btn-primary">Filtrar</button>
+            <a href="{{ url_for(rota_estoque) }}" class="btn-cancel">Limpar filtros</a>
+        </div>
+    </form>
+    <p class="filter-count" role="status">{{ total_resultados }} de {{ total_itens }} {{ 'item encontrado' if total_resultados == 1 else 'itens encontrados' }}.</p>
+</section>

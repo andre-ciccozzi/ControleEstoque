@@ -162,7 +162,8 @@ header {
     font-weight: 600;
 }
 
-.input-group input {
+.input-group input,
+.input-group select {
     border: 1px solid #cbd5e1;
     border-radius: 10px;
     padding: 12px 14px;
@@ -222,6 +223,61 @@ header {
     display: flex;
     align-items: center;
     gap: 12px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.user-actions form {
+    margin: 0;
+}
+
+.role-form {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.role-form label {
+    color: #475569;
+    font-size: 0.85rem;
+}
+
+.role-form select {
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: #fff;
+    font: inherit;
+}
+
+.stat-box.pending {
+    background: #92400e;
+}
+
+.stat-box a {
+    color: #fff;
+    font-size: 0.85rem;
+}
+
+.user-info .badge {
+    display: inline-block;
+    margin-top: 6px;
+}
+
+.badge.badge-pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.badge.badge-admin {
+    background: #e0e7ff;
+    color: #3730a3;
+}
+
+.self-label {
+    color: #475569;
+    font-size: 0.9rem;
 }
 
 .badge {
@@ -305,4 +361,27 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+@media (max-width: 760px) {
+    .container {
+        margin: 18px 12px 90px;
+        padding: 18px;
+    }
+
+    .user-item,
+    .hero-card {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .user-actions {
+        justify-content: flex-start;
+    }
+
+    .top-nav {
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 14px 18px;
+    }
 }
