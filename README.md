@@ -1,6 +1,6 @@
 # ControleEstoque — AGS Solution
 
-Sistema web para gerenciar itens com e sem patrimônio, controlar o acesso de usuários e exportar o estoque para Excel. A aplicação usa Python e Flask, com páginas HTML/Jinja e CSS local. Não precisa de Node.js, npm ou PostgreSQL.
+Sistema web para gerenciar itens com e sem patrimônio, controlar o acesso de usuários e exportar o estoque para Excel. A aplicação usa Python e Flask, com páginas HTML/Jinja e CSS local. 
 
 O MySQL pode funcionar como banco principal. O SQLite funciona como banco local quando o MySQL não está disponível e como cópia dos dados confirmados no MySQL.
 
@@ -315,9 +315,7 @@ Os testes usam bancos SQLite temporários. Os caminhos MySQL são verificados co
 
 Há cobertura de perfis, aprovação/rejeição, promoção e remoção de contas, proteção de rotas e CSRF, CRUD, filtros com acentos, paginação com carga de 100 itens por categoria, downloads completos, criação de banco, cópia, indisponibilidade, recuperação e conflitos entre bancos. Os dados locais da aplicação não são usados nos testes.
 
-## Conteúdo para GitHub
 
-Mantenha os fontes, as telas, os estilos, as imagens utilizadas, os arquivos de configuração de exemplo, as dependências, os utilitários e os testes.
 
 O `.gitignore` exclui bancos locais, arquivos de recuperação, `config.local.json`, `.env`, ambientes virtuais, caches, logs e configurações locais do editor. Publique `config.example.json`, preenchendo as credenciais somente na sua cópia local.
 
